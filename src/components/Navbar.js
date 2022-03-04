@@ -1,80 +1,81 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Navbar.css';
+import styled from 'styled-components';
 
 function Navbar() {
-    const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
-
-    const handleClick = () => setClick(!click);
-    const closeMobileMenu = () => setClick(false);
-
-    const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        }
-    };
-
-    useEffect(() => {
-        showButton();
-    }, []);
-
-    window.addEventListener('resize', showButton);
-
     return (
-        <>
-            <nav className='navbar'>
-                <div className='navbar-container'>
-                    <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-                        BRZ
-                        <i className='fab fa-typo3' />
-                    </Link>
-                    <div className='menu-icon' onClick={handleClick}>
-                        X
-                        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-                    </div>
-                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                        <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                                Home
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link
-                                to='/services'
-                                className='nav-links'
-                                onClick={closeMobileMenu}
-                            >
-                                Services
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link
-                                to='/products'
-                                className='nav-links'
-                                onClick={closeMobileMenu}
-                            >
-                                Products
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to='/sign-up'
-                                className='nav-links-mobile'
-                                onClick={closeMobileMenu}
-                            >
-                                Sign Up
-                            </Link>
-                        </li>
-                    </ul>
-                    {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
-                </div>
-            </nav>
-        </>
+        <NavbarNav>
+            <NavContainer>
+                <LogoLink to='/'>
+                    BRZ
+                </LogoLink>
+                <NavMenu>
+                    <NavItem>
+                        <NavLink to='/attributes'>Attributes</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to='/events'>Events</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to='/purchases'>Purchases</NavLink>
+                    </NavItem>
+                </NavMenu>
+            </NavContainer>
+        </NavbarNav>
     );
 }
+
+const NavbarNav = styled.nav`
+    background: linear-gradient(90deg, rgb(28, 27, 27) 0%, rgb(26, 23, 23) 100%);
+    height: 80px;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+`;
+
+const NavContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 80px;
+    max-width: 1500px;
+`;
+
+const LogoLink = styled(Link)`
+    color: #fff;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+`;
+
+const NavMenu = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const NavItem = styled.div`
+    height: 80px;
+`;
+
+const NavLink = styled(Link)`
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+
+    &:hover {
+        border-bottom: 4px solid #fff;
+        transition: all 0.2s ease-out; 
+    }
+`;
+
 
 export default Navbar;

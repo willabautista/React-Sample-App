@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
-import HeroSection from './components/HeroSection';
+import Attributes from './components/pages/Attributes';
 
 function App() {
     return (
@@ -11,6 +11,9 @@ function App() {
                 <Navbar />
                 <Routes>
                     <Route path='/' exact element={<Home />} />
+                    <Route path='/attributes' element={<Attributes />} />
+                    <Route path='/events' element={<Home />} />
+                    <Route path='/purchases' element={<Home />} />
                 </Routes>
             </Router>
         </>
