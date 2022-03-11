@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Attributes() {
+function Subpage({ title }) {
     return (
         <>
-            <Header>Attributes</Header>
+            <Header>{title}</Header>
         </>
     )
 }
@@ -14,4 +14,4 @@ const Header = styled.p`
     margin: 100px;
 `;
 
-export default Attributes
+export default Subpage
